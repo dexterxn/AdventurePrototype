@@ -4,6 +4,25 @@ class Church extends AdventureScene {
     }
 
     onEnter() {
+
+        let prayerBeads = this.add.text(this.w * 0.5, this.w * 0.1, "📿 Prayer Beads")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("Someone left their prayer beads on the ground.")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("You picked up the Prayer Beads off the ground.");
+                this.gainItem('prayerBeads');
+                this.tweens.add({
+                    targets: prayerBeads,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => prayerBeads.destroy()
+                });
+            })
+
         let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
             .setFontSize(this.s * 5)
             .setInteractive()
@@ -143,6 +162,25 @@ class DarkForest extends AdventureScene {
     }
 
     onEnter() {
+
+        let castleKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 castleKey")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("It's a nice key.")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("You pick up the key.");
+                this.gainItem('castleKey');
+                this.tweens.add({
+                    targets: castleKey,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => castleKey.destroy()
+                });
+            })
+
         let west = this.add.text(this.w * 0.1, this.w * 0.3, "⬅️")
             .setFontSize(this.s * 5)
             .setInteractive()
@@ -185,6 +223,23 @@ class Castle extends AdventureScene {
 
     onEnter() {
         
+        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 Locked Castle Door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("castleKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("It's locked.");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("castleKey")) {
+                    this.showMessage("*clang* ");
+                    door.setText("🚪 unlocked door");
+                    this.gotoScene('dungeon');
+                }
+            })
 
         let north = this.add.text(this.w * 0.35, this.w * 0.1, "⬆️")
             .setFontSize(this.s * 5)
@@ -337,7 +392,80 @@ class Outro extends AdventureScene {
 }
 
 class Dungeon extends AdventureScene {
-    
+    constructor() {
+        super("dungeon", "Dungeon Room");
+    }
+
+    onEnter() {
+
+        let jailKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 jail key")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("It's a small key.")
+            })
+            .on('pointerdown', () => {
+                this.showMessage("You pick up the key.");
+                this.gainItem('jailKey');
+                this.tweens.add({
+                    targets: jailKey,
+                    y: `-=${2 * this.s}`,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    onComplete: () => jailKey.destroy()
+                });
+            })
+
+        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 locked door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("It's locked. Can you find a key?");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("*click*");
+                    door.setText("🚪 empty");
+                }
+            })
+        let door2 = this.add.text(this.w * 0.1, this.w * 0.2, "🚪 locked door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("It's locked. Can you find a key?");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("*click*");
+                    door2.setText("🚪 empty");
+                }
+            })
+        let door3 = this.add.text(this.w * 0.1, this.w * 0.25, "🚪 locked door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("It's locked. Can you find a key?");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("*click*");
+                    door3.setText("🚪 empty");
+                }
+            })
+
+    }
 }
 
 
