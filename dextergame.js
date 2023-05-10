@@ -124,30 +124,6 @@ class House extends AdventureScene {
         this.addNorth(bob, 'castle');
     }
 }
-class Intro extends Phaser.Scene {
-    constructor() {
-        super('intro')
-    }
-    create() {
-        this.add.text(50,50, "Adventure awaits!").setFontSize(50);
-        this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
-        this.input.on('pointerdown', () => {
-            this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('house'));
-        });
-    }
-}
-
-class Outro extends AdventureScene {
-    constructor() {
-        super('outro');
-    }
-    create() {
-        this.add.text(50, 50, "That's all!").setFontSize(50);
-        this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
-        this.input.on('pointerdown', () => this.scene.start('intro'));
-    }
-}
 
 class Dungeon extends AdventureScene {
     constructor() {
@@ -175,11 +151,104 @@ class Dungeon extends AdventureScene {
             })
         
         let door = this.createDoor(0.15);
-        let door1 = this.createDoor(0.2);
+
+        let door1 = this.add.text(this.w * 0.1, this.w * 0.2, "🚪 locked jail")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("This jail cell is locked. Can you find a key?");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("*click*");
+                    door1.setText("🚪 something inside!");
+
+                    if(this.hasItem("prayerBeads")){
+                        this.gotoScene('goodEnding');
+
+                    }else{
+                        this.gotoScene('badEnding');
+                    }
+                }
+            })
+        
         let door2 = this.createDoor(0.25);
         let door3 = this.createDoor(0.3);
+
     }
 }
+class GoodEnding extends Phaser.Scene {
+    constructor(){
+        super('goodEnding')
+    }
+    create() {
+        this.add.text(50,50, "You've found the princess inside of the jail cell. She is Demon Posessed! Thankfully you have your prayer beads.").setFontSize(20);
+        this.add.text(50,100, "You get down on your knees and start praying. The Evil spirit leaves her body. You escort her out of the dungeon and back to the king!").setFontSize(20);
+        this.add.text(50,150, "Congradulations you've won!").setFontSize(50);
+        this.add.text(50,200, "Click to continue").setFontSize(20);
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('outro'));
+        });
+    }
+
+}
+class BadEnding extends Phaser.Scene {
+    constructor(){
+        super('badEnding')
+    }
+    create() {
+        this.add.text(50,50, "You get attacked by the demon possessed princess you die!").setFontSize(50);
+        this.add.text(50,100, "Click to continue").setFontSize(20);
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('outro'));
+        });
+    }
+
+}
+class Intro extends Phaser.Scene {
+    constructor() {
+        super('intro')
+    }
+    create() {
+        // this.add.text(50,50, "Adventure awaits!").setFontSize(50);
+        // this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
+        // this.input.on('pointerdown', () => {
+        //     this.cameras.main.fade(1000, 0,0,0);
+        //     this.time.delayedCall(1000, () => this.scene.start('house'));
+        // });
+        this.add.text(50,50, "You've found the princess inside of the jail cell.").setFontSize(50);
+        this.time.delayedCall(1000, (this.add.text(50,100, "She is Demon Posessed! Thankfully you have your prayer beads.").setFontSize(50)));
+        this.add.text(50,150, "You get down on your knees and start praying.").setFontSize(50);
+        this.add.text(50,200, "The Evil spirit leaves her body.").setFontSize(50);
+        this.add.text(50,250, "You escort her out of the dungeon and back to the king!").setFontSize(50);
+        this.add.text(50,300, "Congratulations you've won!").setFontSize(50);
+        this.add.text(50,350, "Click to continue").setFontSize(20);
+
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('outro'));
+        });
+    }
+}
+
+class Outro extends AdventureScene {
+    constructor() {
+        super('outro');
+    }
+    create() {
+        this.add.text(50, 50, "That's all!").setFontSize(50);
+        this.add.text(50, 100, "Click anywhere to restart.").setFontSize(20);
+        this.input.on('pointerdown', () => this.scene.start('intro'));
+    }
+}
+
+
 
 
 const game = new Phaser.Game({
@@ -189,7 +258,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, House, Castle, Church, Market, Village, DarkForest, Dungeon, Outro],
+    scene: [Intro, House, Castle, Church, Market, Village, DarkForest, Dungeon, GoodEnding, BadEnding, Outro],
     title: "Adventure Game",
 });
 

@@ -170,14 +170,14 @@ class AdventureScene extends Phaser.Scene {
     }
     
     createDoor(yVal){
-        let door = this.add.text(this.w * 0.1, this.w * yVal, "🚪 locked door")
+        let door = this.add.text(this.w * 0.1, this.w * yVal, "🚪 locked jail")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("jailKey")) {
                     this.showMessage("You've got the key for this door.");
                 } else {
-                    this.showMessage("It's locked. Can you find a key?");
+                    this.showMessage("This jail cell is locked. Can you find a key?");
                 }
             })
             .on('pointerdown', () => {
