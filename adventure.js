@@ -168,4 +168,123 @@ class AdventureScene extends Phaser.Scene {
             }
         });
     }
+    
+    createDoor(yVal){
+        let door = this.add.text(this.w * 0.1, this.w * yVal, "🚪 locked door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("You've got the key for this door.");
+                } else {
+                    this.showMessage("It's locked. Can you find a key?");
+                }
+            })
+            .on('pointerdown', () => {
+                if (this.hasItem("jailKey")) {
+                    this.showMessage("*click*");
+                    door.setText("🚪 empty");
+                }
+            })
+        return door;
+    }
+
+    createBob(){
+        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
+            .on('pointerdown', () => {
+                this.showMessage("Stop poking me!");
+                this.tweens.add({
+                    targets: bob,
+                    x: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            });
+
+        return bob;
+        
+    }
+
+    addNorth(bob, scene){
+        let north = this.add.text(this.w * 0.35, this.w * 0.1, "⬆️")
+        .setFontSize(this.s * 5)
+        .setInteractive()
+        .on('pointerover', () => this.showMessage("Go North"))
+        .on('pointerdown', () => {
+            this.showMessage("Moving Bob Northward");
+            this.tweens.add({
+                targets: bob,
+                y: '-=' + this.w*0.2,
+                duration: 1000,
+                onComplete: () => bob.destroy()
+                
+            });
+            this.gotoScene(scene);
+            console.log("click on Up Arrow");
+        });
+
+    }
+    
+    addSouth(bob, scene){
+        let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
+            .setFontSize(this.s * 5)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Go South"))
+            .on('pointerdown', () => {
+                this.showMessage("Moving Bob Southward");
+                this.tweens.add({
+                    targets: bob,
+                    y: '+=' + this.w*0.2,
+                    duration: 1000,
+                    onComplete: () => bob.destroy()
+                    
+                });
+                this.gotoScene(scene);
+                console.log("click on Down Arrow");
+            });
+    }
+
+    addEast(bob, scene){
+        let east = this.add.text(this.w * 0.6, this.w * 0.3, "➡️")
+            .setFontSize(this.s * 5)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Go East"))
+            .on('pointerdown', () => {
+                this.showMessage("Moving Bob Eastward");
+                this.tweens.add({
+                    targets: bob,
+                    x: '+=' + this.w*0.2,
+                    duration: 1000,
+                    onComplete: () => bob.destroy()
+                    
+                });
+                this.gotoScene(scene);
+                console.log("click on Right Arrow");
+            });
+    }
+
+    addWest(bob, scene){
+        let west = this.add.text(this.w * 0.1, this.w * 0.3, "⬅️")
+            .setFontSize(this.s * 5)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Go West"))
+            .on('pointerdown', () => {
+                this.showMessage("Moving Bob Westward");
+                this.tweens.add({
+                    targets: bob,
+                    x: '-=' + this.w*0.2,
+                    duration: 1000,
+                    onComplete: () => bob.destroy()
+                    
+                });
+                this.gotoScene(scene);
+                console.log("click on Left Arrow");
+            });
+    }
+
 }

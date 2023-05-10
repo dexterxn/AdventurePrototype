@@ -22,39 +22,9 @@ class Church extends AdventureScene {
                     onComplete: () => prayerBeads.destroy()
                 });
             })
-
-        let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go South"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Southward");
-                this.tweens.add({
-                    targets: bob,
-                    y: '+=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('castle');
-                console.log("click on Down Arrow");
-            });
         
-        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-            .setFontSize(this.s * 10)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-            .on('pointerdown', () => {
-                this.showMessage("Stop poking me!");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+        let bob = this.createBob();
+        this.addSouth(bob, 'castle');
     }
 }
 class Market extends AdventureScene {
@@ -62,39 +32,8 @@ class Market extends AdventureScene {
         super("market", "Market Room");
     }
     onEnter() {
-        let east = this.add.text(this.w * 0.6, this.w * 0.3, "➡️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go East"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Eastward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('castle');
-                console.log("click on Right Arrow");
-            });
-        
-
-            let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-                .setFontSize(this.s * 10)
-                .setInteractive()
-                .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-                .on('pointerdown', () => {
-                    this.showMessage("Stop poking me!");
-                    this.tweens.add({
-                        targets: bob,
-                        x: '+=' + this.s,
-                        repeat: 2,
-                        yoyo: true,
-                        ease: 'Sine.inOut',
-                        duration: 100
-                    });
-                });
+        let bob = this.createBob();
+        this.addEast(bob, 'castle');
     }
 }
 
@@ -103,56 +42,10 @@ class Village extends AdventureScene {
         super("village", "Village Room");
     }
 
-    onEnter() {       
-        let east = this.add.text(this.w * 0.6, this.w * 0.3, "➡️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go East"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Eastward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('darkForest');
-                console.log("click on Right Arrow");
-            });
-        
-        let west = this.add.text(this.w * 0.1, this.w * 0.3, "⬅️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go West"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Westward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '-=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('castle');
-                console.log("click on Left Arrow");
-            });
-
-        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-            .setFontSize(this.s * 10)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-            .on('pointerdown', () => {
-                this.showMessage("Stop poking me!");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+    onEnter() {
+        let bob = this.createBob();
+        this.addEast(bob, 'darkForest');       
+        this.addWest(bob, 'castle');
     }
 }
 
@@ -180,39 +73,8 @@ class DarkForest extends AdventureScene {
                     onComplete: () => castleKey.destroy()
                 });
             })
-
-        let west = this.add.text(this.w * 0.1, this.w * 0.3, "⬅️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go West"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Westward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '-=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('village');
-                console.log("click on Left Arrow");
-            });
-
-        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-            .setFontSize(this.s * 10)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-            .on('pointerdown', () => {
-                this.showMessage("Stop poking me!");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+        let bob = this.createBob();
+        this.addWest(bob, 'village');
     }
 }
 
@@ -243,90 +105,12 @@ class Castle extends AdventureScene {
                     this.gotoScene('dungeon');
                 }
             })
-
-        let north = this.add.text(this.w * 0.35, this.w * 0.1, "⬆️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go North"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Northward");
-                this.tweens.add({
-                    targets: bob,
-                    y: '-=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('church');
-                console.log("click on Up Arrow");
-            });
         
-        let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go South"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Southward");
-                this.tweens.add({
-                    targets: bob,
-                    y: '+=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('house');
-                console.log("click on Down Arrow");
-            });
-        
-        let east = this.add.text(this.w * 0.6, this.w * 0.3, "➡️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go East"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Eastward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('village');
-                console.log("click on Right Arrow");
-            });
-        
-        let west = this.add.text(this.w * 0.1, this.w * 0.3, "⬅️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go West"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Westward");
-                this.tweens.add({
-                    targets: bob,
-                    x: '-=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('market');
-                console.log("click on Left Arrow");
-            });
-
-        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-            .setFontSize(this.s * 10)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-            .on('pointerdown', () => {
-                this.showMessage("Stop poking me!");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+        let bob = this.createBob();
+        this.addNorth(bob, 'church');
+        this.addSouth(bob, 'house');
+        this.addEast(bob, 'village');
+        this.addWest(bob, 'market');
     }
 }
 
@@ -336,37 +120,8 @@ class House extends AdventureScene {
     }
 
     onEnter() {
-        let north = this.add.text(this.w * 0.35, this.w * 0.1, "⬆️")
-            .setFontSize(this.s * 5)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Go North"))
-            .on('pointerdown', () => {
-                this.showMessage("Moving Bob Northward");
-                this.tweens.add({
-                    targets: bob,
-                    y: '-=' + this.w*0.2,
-                    duration: 1000,
-                    onComplete: () => bob.destroy()
-                    
-                });
-                this.gotoScene('castle');
-                console.log("click on Up Arrow");
-            });
-        let bob = this.add.text(this.w * 0.3, this.w * 0.3, "🧍")
-            .setFontSize(this.s * 10)
-            .setInteractive()
-            .on('pointerover', () => this.showMessage("Hi I am Bob!"))
-            .on('pointerdown', () => {
-                this.showMessage("Stop poking me!");
-                this.tweens.add({
-                    targets: bob,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
+        let bob = this.createBob();
+        this.addNorth(bob, 'castle');
     }
 }
 class Intro extends Phaser.Scene {
@@ -418,66 +173,11 @@ class Dungeon extends AdventureScene {
                     onComplete: () => jailKey.destroy()
                 });
             })
-
-        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 locked door")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                if (this.hasItem("jailKey")) {
-                    // door.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
-                    this.showMessage("You've got the key for this door.");
-                } else {
-                    this.showMessage("It's locked. Can you find a key?");
-                }
-            })
-            .on('pointerdown', () => {
-                // if (this.holdingItem("jailKey")) {
-                //     this.showMessage("opened!");
-                // }
-                // else {
-                //     this.showMessage("Select jailKey in the inventory first and then click on the door.");
-                   
-                // }
-
-                if (this.hasItem("jailKey")) {
-                    this.showMessage("*click*");
-                    door.setText("🚪 empty");
-                }
-
-            })
-        let door2 = this.add.text(this.w * 0.1, this.w * 0.2, "🚪 locked door")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                if (this.hasItem("jailKey")) {
-                    this.showMessage("You've got the key for this door.");
-                } else {
-                    this.showMessage("It's locked. Can you find a key?");
-                }
-            })
-            .on('pointerdown', () => {
-                if (this.hasItem("jailKey")) {
-                    this.showMessage("*click*");
-                    door2.setText("🚪 empty");
-                }
-            })
-        let door3 = this.add.text(this.w * 0.1, this.w * 0.25, "🚪 locked door")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                if (this.hasItem("jailKey")) {
-                    this.showMessage("You've got the key for this door.");
-                } else {
-                    this.showMessage("It's locked. Can you find a key?");
-                }
-            })
-            .on('pointerdown', () => {
-                if (this.hasItem("jailKey")) {
-                    this.showMessage("*click*");
-                    door3.setText("🚪 empty");
-                }
-            })
-
+        
+        let door = this.createDoor(0.15);
+        let door1 = this.createDoor(0.2);
+        let door2 = this.createDoor(0.25);
+        let door3 = this.createDoor(0.3);
     }
 }
 
