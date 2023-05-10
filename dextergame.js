@@ -12,6 +12,22 @@ class Church extends AdventureScene {
         this.bg.setDisplaySize(windowWidth, widnowHeight);
         
 
+        let pope = this.add.text(this.w * 0.15, this.h * 0.55, "🤵")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Hello traveler I am John the pope! Welcome to the church"))
+            .on('pointerdown', () => {
+                this.showMessage("Those prayer beads helps get rid of bad spirits.");
+                this.tweens.add({
+                    targets: pope,
+                    y: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            })
+
         let prayerBeads = this.add.text(this.w * 0.5, this.w * 0.1, "📿 Prayer Beads")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -48,6 +64,22 @@ class Market extends AdventureScene {
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'market');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
 
+        let merchant = this.add.text(this.w * 0.15, this.h * 0.8, "🧕")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Looking for the princess hmmm"))
+            .on('pointerdown', () => {
+                this.showMessage("I saw the princess running towards the village 2 days ago.");
+                this.tweens.add({
+                    targets: merchant,
+                    y: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            })
+
         let bob = this.createBob();
         this.addEast(bob, 'castle');
     }
@@ -66,6 +98,22 @@ class Village extends AdventureScene {
         let widnowHeight = this.h;
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'village');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
+
+        let villager = this.add.text(this.w * 0.15, this.h * 0.8, "🧖")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Your looking for the princess?"))
+            .on('pointerdown', () => {
+                this.showMessage("I didn't see the princess pass by but King Joshua was running towards the Dark Forest 2 days ago...");
+                this.tweens.add({
+                    targets: villager,
+                    y: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            })
 
         let bob = this.createBob();
         this.addEast(bob, 'darkForest');       
@@ -87,11 +135,11 @@ class DarkForest extends AdventureScene {
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'darkForest');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
 
-        let castleKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 castleKey")
+        let castleKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("It's a nice key.")
+                this.showMessage("The castle key! The king must have dropped it here!")
             })
             .on('pointerdown', () => {
                 this.showMessage("You pick up the key.");
@@ -123,6 +171,31 @@ class Castle extends AdventureScene {
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'castle');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
         
+        let king = this.add.text(this.w * 0.45, this.h * 0.25, "🤴")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Hello traveler, I am King Joshua of this lovely kingdom! Welcome."))
+            .on('pointerdown', () => {
+                
+                if(this.hasItem("castleKey")){
+                    this.showMessage("Oh you've found my keys Thank You! Lets go inside it's chilly outside!");
+                }else{
+                    this.showMessage("My daughter princess Sophia has gone missing Please help me find her!");
+                    this.time.delayedCall(3500, ()=> this.showMessage("I've been searching for her everywhere!"));
+                    this.time.delayedCall(5500, ()=> this.showMessage("Oh no I can't find my castle keys..."));
+                    this.time.delayedCall(7000, ()=> this.showMessage("Anyways the last time I saw my daughter was 3 days ago... "));
+                    this.time.delayedCall(10000, ()=> this.showMessage("she was wandering around in the Market."));
+                }
+                this.tweens.add({
+                    targets: king,
+                    y: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            })
+
         let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 Locked Castle Door")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -131,7 +204,7 @@ class Castle extends AdventureScene {
                     this.showMessage("You've got the key for this door.");
 
                 } else {
-                    this.showMessage("It's locked.");
+                    this.showMessage("What kind of King locks himself out of his castle?");
                     // this.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
 
                 }
@@ -140,7 +213,7 @@ class Castle extends AdventureScene {
                 if (this.hasItem("castleKey")) {
                     this.showMessage("*clang* ");
                     door.setText("🚪 unlocked door");
-                    this.gotoScene('dungeon');
+                    this.gotoScene('castleInside');
                 }
             })
         
@@ -187,7 +260,7 @@ class Dungeon extends AdventureScene {
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'dungeon');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
 
-        let jailKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 jail key")
+        let jailKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
@@ -233,6 +306,73 @@ class Dungeon extends AdventureScene {
         
         let door2 = this.createDoor(0.25);
         let door3 = this.createDoor(0.3);
+
+    }
+}
+
+class CastleInside extends AdventureScene {
+    constructor() {
+        super("castleInside", "Inside the Castle");
+    }
+    preload(){
+        this.load.image("castleInside", "assets/medival castleInside.jpg")
+    }
+
+    onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'castleInside');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
+
+        let king = this.add.text(this.w * 0.45, this.h * 0.25, "🤴")
+            .setFontSize(this.s * 10)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Where could my daughter have gone?"))
+            .on('pointerdown', () => {
+                
+                if(this.hasItem("prayerBeads")){
+                    this.showMessage("Oh I feel at ease with you here!");
+                }else{
+                    this.showMessage("I can sense evil spirits here!");
+                }
+                this.tweens.add({
+                    targets: king,
+                    y: '+=' + this.s,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    duration: 100
+                });
+            })
+
+        let bob = this.createBob();
+        let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
+            .setFontSize(this.s * 5)
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("Go outside"))
+            .on('pointerdown', () => {
+                this.showMessage("Exiting Castle");
+                this.tweens.add({
+                    targets: bob,
+                    y: '+=' + this.w*0.2,
+                    duration: 1000,
+                    onComplete: () => bob.destroy()
+                    
+                });
+                this.gotoScene('castle');
+                console.log("exit castle");
+            });
+
+        let door1 = this.add.text(this.w * 0.1, this.w * 0.2, "🚪 dungeon")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("This door leads to the Dungeon...");
+            })
+            .on('pointerdown', () => {
+                this.showMessage("Heading to the Dungeon...");
+                this.gotoScene("dungeon");
+            })
 
     }
 }
@@ -306,7 +446,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, House, Castle, Church, Market, Village, DarkForest, Dungeon, GoodEnding, BadEnding, Outro],
+    scene: [Intro, House, Castle, CastleInside, Church, Market, Village, DarkForest, Dungeon, GoodEnding, BadEnding, Outro],
     title: "Adventure Game",
 });
 
