@@ -186,10 +186,14 @@ class GoodEnding extends Phaser.Scene {
         super('goodEnding')
     }
     create() {
-        this.add.text(50,50, "You've found the princess inside of the jail cell. She is Demon Posessed! Thankfully you have your prayer beads.").setFontSize(20);
-        this.add.text(50,100, "You get down on your knees and start praying. The Evil spirit leaves her body. You escort her out of the dungeon and back to the king!").setFontSize(20);
-        this.add.text(50,150, "Congradulations you've won!").setFontSize(50);
-        this.add.text(50,200, "Click to continue").setFontSize(20);
+        this.add.text(50,50, "You've found the princess inside of the jail cell.").setFontSize(50);
+        this.time.delayedCall(1000,()=> (this.add.text(50,100, "She is Demon Posessed! Thankfully you have your prayer beads.").setFontSize(50)));
+        this.time.delayedCall(2000, ()=> this.add.text(50,150, "You get down on your knees and start praying.").setFontSize(50));
+        this.time.delayedCall(3000, ()=> this.add.text(50,200, "The Evil spirit leaves her body.").setFontSize(50));
+        this.time.delayedCall(4000, ()=> this.add.text(50,250, "You escort her out of the dungeon and back to the king!").setFontSize(50));
+        this.time.delayedCall(5000, ()=> this.add.text(50,300, "Congratulations you've won!").setFontSize(50));
+        this.time.delayedCall(6000, ()=> this.add.text(50,350, "Click to continue").setFontSize(20));
+
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
             this.time.delayedCall(1000, () => this.scene.start('outro'));
@@ -216,24 +220,13 @@ class Intro extends Phaser.Scene {
         super('intro')
     }
     create() {
-        // this.add.text(50,50, "Adventure awaits!").setFontSize(50);
-        // this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
-        // this.input.on('pointerdown', () => {
-        //     this.cameras.main.fade(1000, 0,0,0);
-        //     this.time.delayedCall(1000, () => this.scene.start('house'));
-        // });
-        this.add.text(50,50, "You've found the princess inside of the jail cell.").setFontSize(50);
-        this.time.delayedCall(1000, (this.add.text(50,100, "She is Demon Posessed! Thankfully you have your prayer beads.").setFontSize(50)));
-        this.add.text(50,150, "You get down on your knees and start praying.").setFontSize(50);
-        this.add.text(50,200, "The Evil spirit leaves her body.").setFontSize(50);
-        this.add.text(50,250, "You escort her out of the dungeon and back to the king!").setFontSize(50);
-        this.add.text(50,300, "Congratulations you've won!").setFontSize(50);
-        this.add.text(50,350, "Click to continue").setFontSize(20);
-
+        this.add.text(50,50, "Adventure awaits!").setFontSize(50);
+        this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('outro'));
+            this.time.delayedCall(1000, () => this.scene.start('house'));
         });
+        
     }
 }
 
