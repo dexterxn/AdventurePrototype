@@ -2,8 +2,15 @@ class Church extends AdventureScene {
     constructor() {
         super("church", "Church Room");
     }
-
+    preload(){
+        this.load.image("church", "assets/medival church.jpg");
+    }
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'church');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
+        
 
         let prayerBeads = this.add.text(this.w * 0.5, this.w * 0.1, "📿 Prayer Beads")
             .setFontSize(this.s * 2)
@@ -31,7 +38,16 @@ class Market extends AdventureScene {
     constructor(){
         super("market", "Market Room");
     }
+    preload(){
+        this.load.image("market", "assets/medival market.jpg")
+    }
+
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'market');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
+
         let bob = this.createBob();
         this.addEast(bob, 'castle');
     }
@@ -41,8 +57,16 @@ class Village extends AdventureScene {
     constructor() {
         super("village", "Village Room");
     }
+    preload(){
+        this.load.image("village", "assets/medival village.jpg")
+    }
 
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'village');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
+
         let bob = this.createBob();
         this.addEast(bob, 'darkForest');       
         this.addWest(bob, 'castle');
@@ -53,8 +77,15 @@ class DarkForest extends AdventureScene {
     constructor() {
         super("darkForest", "Dark Forest Room");
     }
+    preload(){
+        this.load.image("darkForest", "assets/medival darkForest.jpg")
+    }
 
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'darkForest');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
 
         let castleKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 castleKey")
             .setFontSize(this.s * 2)
@@ -82,8 +113,15 @@ class Castle extends AdventureScene {
     constructor() {
         super("castle", "Castle Room");
     }
+    preload(){
+        this.load.image("castle", "assets/medival castle.jpg")
+    }
 
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'castle');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
         
         let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 Locked Castle Door")
             .setFontSize(this.s * 2)
@@ -118,8 +156,18 @@ class House extends AdventureScene {
     constructor() {
         super("house", "House Room");
     }
+    preload(){
+        this.load.image("house", "assets/medival house.jpg");
+
+    }
 
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'house');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
+        // const img = this.add.sprite(this.w * 0.25, this.w * 0.25, 'house');
+        // img.scale = 2;
         let bob = this.createBob();
         this.addNorth(bob, 'castle');
     }
@@ -129,8 +177,15 @@ class Dungeon extends AdventureScene {
     constructor() {
         super("dungeon", "Dungeon Room");
     }
+    preload(){
+        this.load.image("dungeon", "assets/medival dungeon.jpg")
+    }
 
     onEnter() {
+        let windowWidth = this.w*0.75;
+        let widnowHeight = this.h;
+        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'dungeon');
+        this.bg.setDisplaySize(windowWidth, widnowHeight);
 
         let jailKey = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 jail key")
             .setFontSize(this.s * 2)
