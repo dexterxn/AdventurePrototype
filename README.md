@@ -20,3 +20,11 @@ Asset sources:
 Code sources:
 - `adventure.js` and `index.html` were created for this project [Adam Smith](https://github.com/rndmcnlly) and edited by me.
 - `game.js` was sketched by [Adam Smith](https://github.com/rndmcnlly) and rewritten by me.
+
+Code requirements:
+- I have Castle, Church, Dungeon, Market, and others
+- not based on Adventure Scenes include Good Ending and Bad Ending
+- I have an addNorth, addSouth, createBob 
+    - addNorth adds the up pointing emoji and takes a scene as a parameter so I can choose what scene the up button goes to 
+    - addSouth is same as addNorth except for down arrow
+    - createBob places bob in the middle of the scene for each scene.
