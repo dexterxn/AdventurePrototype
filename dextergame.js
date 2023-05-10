@@ -229,8 +229,11 @@ class Castle extends AdventureScene {
             .on('pointerover', () => {
                 if (this.hasItem("castleKey")) {
                     this.showMessage("You've got the key for this door.");
+
                 } else {
                     this.showMessage("It's locked.");
+                    // this.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
+
                 }
             })
             .on('pointerdown', () => {
@@ -421,16 +424,26 @@ class Dungeon extends AdventureScene {
             .setInteractive()
             .on('pointerover', () => {
                 if (this.hasItem("jailKey")) {
+                    // door.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
                     this.showMessage("You've got the key for this door.");
                 } else {
                     this.showMessage("It's locked. Can you find a key?");
                 }
             })
             .on('pointerdown', () => {
+                // if (this.holdingItem("jailKey")) {
+                //     this.showMessage("opened!");
+                // }
+                // else {
+                //     this.showMessage("Select jailKey in the inventory first and then click on the door.");
+                   
+                // }
+
                 if (this.hasItem("jailKey")) {
                     this.showMessage("*click*");
                     door.setText("🚪 empty");
                 }
+
             })
         let door2 = this.add.text(this.w * 0.1, this.w * 0.2, "🚪 locked door")
             .setFontSize(this.s * 2)

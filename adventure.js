@@ -147,4 +147,25 @@ class AdventureScene extends Phaser.Scene {
     onEnter() {
         console.warn('This AdventureScene did not implement onEnter():', this.constructor.name);
     }
+    // credit Benthan Vu 
+    returnItem(item) {
+        this.heldItem = null;  
+        this.tweens.add({
+            targets: item,
+            angle: {from: -5, to: 5},
+            duration: 250,
+            onComplete: () => { 
+                let h = this.h * 0.66 + 3 * this.s;
+                this.tweens.add({
+                    targets: item,
+                    x: {from: this.mousex,  to: this.w * 0.75 + 2 * this.s},
+                    y: {from: this.mousey,  to: h + item.height + this.s},
+                    duration: 250,
+                    onComplete: () => {
+                        this.updateInventory();
+                    }
+                });
+            }
+        });
+    }
 }
