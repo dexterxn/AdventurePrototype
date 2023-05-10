@@ -105,15 +105,16 @@ class Village extends AdventureScene {
             .on('pointerover', () => this.showMessage("Your looking for the princess?"))
             .on('pointerdown', () => {
                 this.showMessage("I didn't see the princess pass by but King Joshua was running towards the Dark Forest 2 days ago...");
-                this.tweens.add({
-                    targets: villager,
-                    y: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
+                
             })
+        this.tweens.add({
+            targets: villager,
+            x: '+=' + this.w*0.1,
+            repeat: -1,
+            yoyo: true,
+            ease: 'Sine.inOut',
+            duration: 1000
+        });
 
         let bob = this.createBob();
         this.addEast(bob, 'darkForest');       
@@ -324,10 +325,10 @@ class CastleInside extends AdventureScene {
         this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'castleInside');
         this.bg.setDisplaySize(windowWidth, widnowHeight);
 
-        let king = this.add.text(this.w * 0.45, this.h * 0.25, "🤴")
+        let king = this.add.text(this.w * 0.15, this.h * 0.7, "🤴")
             .setFontSize(this.s * 10)
             .setInteractive()
-            .on('pointerover', () => this.showMessage("Where could my daughter have gone?"))
+            .on('pointerover', () => this.showMessage("Where could my daughter have gone? I'm so anxious!"))
             .on('pointerdown', () => {
                 
                 if(this.hasItem("prayerBeads")){
@@ -335,15 +336,16 @@ class CastleInside extends AdventureScene {
                 }else{
                     this.showMessage("I can sense evil spirits here!");
                 }
-                this.tweens.add({
-                    targets: king,
-                    y: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
+                
             })
+            this.tweens.add({
+                targets: king,
+                x: '+=' + this.w*0.3,
+                repeat: -1,
+                yoyo: true,
+                ease: 'Sine.inOut',
+                duration: 2000
+            });
 
         let bob = this.createBob();
         let south = this.add.text(this.w * 0.35, this.w * 0.5, "⬇️")
