@@ -1,3 +1,5 @@
+Play here: https://dexterxn.github.io/AdventurePrototype/
+
 A simple adventure game by Dexter based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
 
 Code requirements:
